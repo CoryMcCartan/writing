@@ -1,0 +1,89 @@
+body {
+    margin: 0;
+    background-color: #aaa;
+    font: 300 1em/1em Roboto !important;
+    -webkit-user-select: none;
+}
+
+main {
+    width: 100vw;
+    height: 100vh;
+    opacity: 0;
+    transition: opacity 700ms;
+}
+
+textarea#text {
+    resize: none;
+    border: none;
+    outline: none;
+    padding: 4px !important;
+    background-color: transparent;
+    width: 90vw;
+    max-width: 720px;
+    height: 1em;
+    padding: 0;
+    line-height: 1.3em;
+    text-align: justify;
+/*     -webkit-user-select: none; */
+}
+
+.textarea-parent {
+    text-align: center;
+    padding-top: 32px;
+    position: absolute;
+    bottom: 30vh;
+    width: 100vw;
+}
+
+.top-info {
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    padding: 4px;
+    display: flex;
+    box-sizing: border-box;
+    font-size: 10pt;
+}
+
+.mode-indicator {
+    font-weight: bold;
+    font-size: 12pt;
+    opacity: 0.5;
+}
+
+.spacer {
+    flex-grow: 1;
+}
+
+
+
+.fab-container {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    position: fixed !important;
+    bottom: 1.5em;
+    right: 1.5em;
+}
+.fab-container .mdl-button--fab {
+    margin-top: 0.75em;
+    position: relative;
+    z-index: 5;
+}
+.fab-container .mdl-button--fab:not(.main-fab) {
+    opacity: 0;
+    transition: all 250ms;
+    top: 0.5em;
+    transform: scale(0.8);
+    z-index: 4;
+}
+.fab-container:hover .mdl-button--fab:not(.main-fab) {
+    opacity: 1;
+    transform: scale(1);
+    top: 0;
+}
+
+label.mdl-radio {
+    margin-right: 0.5em;
+}
+

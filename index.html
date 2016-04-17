@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Writing</title>
+
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,300">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.green-indigo.min.css">
+    <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+</head>
+<body>
+    <main :style="Themes[options.theme].app" @click="focusTextarea">
+        <div class="top-info" :style="Themes[options.theme].chrome">
+            <span class="mode-indicator">{{ writing ? "WRITING" : "EDITING" }}</span>
+            <span class="spacer"></span>
+            <span class="stats" v-show="!writing">
+                {{ wordCount }} words, 
+                {{ characterCount }} characters,
+                {{ sentenceLength }} words per sentence</span>
+        </div>
+
+        <div class="textarea-parent" :style="wrapperStyle">
+            <textarea :style="[Themes[options.theme].text, Typing.styles]" :disabled="!writing"
+             @keydown='handleSpecialKeys' 
+             @input='textEntered' 
+             @change='saveWriting' 
+             v-model="input.text"
+             placeholder="Type here" id="text"></textarea>
+        </div>
+
+        <div class="fab-container">
+            <button @click="toggleWriting" :class="writing ? '' : 'mdl-color--green'"
+                 class="mdl-button mdl-js-button mdl-button--fab main-fab">
+                <i class="material-icons">{{ writing ? "pause" : "play_arrow" }}</i>
+            </button>
+
+            <button @click="Dialogs.show('settings')" class="settings-fab mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab">
+                <i class="material-icons">settings</i>
+            </button>
+        </div>
+
+        <!-- DIALOGS -->
+        <dialog id="settings" class="mdl-dialog">
+            <h4 autofocus class="mdl-dialog__title">Settings</h4>
+            <div class="mdl-dialog__content">
+                <form action="#">
+                    <label v-mdl class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-1">
+                        <input type="checkbox" id="switch-1" class="mdl-switch__input" 
+                                     v-model="options.typewriterScrolling">
+                        <span class="mdl-switch__label">Typewriter scrolling</span>
+                    </label>
+
+                    <h5>Backspaces Allowed</h5>
+                    <p style="width: 100%">
+                        <input v-mdl class="mdl-slider mdl-js-slider" type="range" 
+                        min="0" max="20" step="1"
+                        v-model="options.maxBackspaces">
+                    </p>
+
+                    <h5>Theme</h5>
+                    <label v-mdl class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-1">
+                        <input type="radio" id="option-1" class="mdl-radio__button" 
+                            name="theme-options" value="main" v-model="options.theme">
+                        <span class="mdl-radio__label">Normal</span>
+                    </label>
+                    <label v-mdl class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-2">
+                        <input type="radio" id="option-2" class="mdl-radio__button" 
+                            name="theme-options" value="dark" v-model="options.theme">
+                        <span class="mdl-radio__label">Dark</span>
+                    </label>
+                </form>
+            </div>
+            <div class="mdl-dialog__actions">
+                <button autofocus @click="saveSettings(), Dialogs.close('settings')"
+                    class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+                    OK
+                </button>
+            </div>
+        </dialog>
+
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.21/vue.min.js"></script>
+    <script src="http://corymccartan.github.io/jslib/lib.min.js"></script>
+    <script src="js/lib/mousetrap.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/lib/text-stats.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/lib/localforage.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/visual.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/storage.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/dialogs.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/stats.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/typing.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/main.js" type="text/javascript" charset="utf-8"></script>
+</body>
+</html>
