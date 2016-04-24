@@ -56,6 +56,7 @@ window.Typing = (function() {
             [/\b(t)eh\b/gi, "$1he"],
             [/\b(a)dn\b/gi, "$1nd"],
             [/--/gi, "—"],
+            [/(\s)‘(\d)/gi, "$1’$2"],
             //[/\n\s*(\w)/gi, t => t[0] + t.substr(1).toUpperCase()],
         ];
         
@@ -182,7 +183,7 @@ window.Typing = (function() {
 
             let quote;
 
-            if (previous === " " || previous === "") {
+            if (previous === " " || previous === "" || previous === "\n") {
                 if (e.shiftKey) 
                     quote = "“";
                 else
@@ -283,8 +284,9 @@ window.Typing = (function() {
         el.value = el.value.substr(0, boundaries.start) + el.value.substr(boundaries.end);
         $scope.input.text = el.value;
         // reset selection
+        let oldMode = selectionMode;
         selectionMode = ""; 
-        self.setSelectionMode(selectionMode);
+        self.setSelectionMode(oldMode);
     };
 
     self.undo = function() {
