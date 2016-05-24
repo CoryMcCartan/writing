@@ -23,7 +23,7 @@
         </div>
 
         <div class="textarea-parent" :style="wrapperStyle">
-            <textarea :style="[Themes[options.theme].text, Typing.styles]" :disabled="!writing"
+            <textarea :style="[Themes[options.theme].text, {fontFamily: options.font}, Typing.styles]" :disabled="!writing"
              @keydown='handleSpecialKeys' 
              @input='textEntered' 
              @change='saveWriting' 
@@ -70,6 +70,18 @@
                         <input type="radio" id="option-2" class="mdl-radio__button" 
                             name="theme-options" value="dark" v-model="options.theme">
                         <span class="mdl-radio__label">Dark</span>
+                    </label>
+
+                    <h5>Font</h5>
+                    <label v-mdl class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-3">
+                        <input type="radio" id="option-3" class="mdl-radio__button" 
+                            name="font-options" value="Cochin" v-model="options.font">
+                        <span class="mdl-radio__label">Cochin</span>
+                    </label>
+                    <label v-mdl class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-4">
+                        <input type="radio" id="option-4" class="mdl-radio__button" 
+                            name="font-options" value="Courier" v-model="options.font">
+                        <span class="mdl-radio__label">Courier</span>
                     </label>
                 </form>
             </div>
