@@ -13,6 +13,7 @@ function main() {
             Typing,
             options: {
                 theme: "main",
+                font: "Cochin",
                 typewriterScrolling: false,
                 maxBackspaces: 5,
             },

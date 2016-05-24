@@ -10,7 +10,6 @@ window.Themes = {
             backgroundColor: "#f7f7f7",
         },
         text: {
-            fontFamily: "Cochin",
             fontSize: "15pt",
             color: "black !important",
         },
@@ -23,7 +22,6 @@ window.Themes = {
             backgroundColor: "#444",
         },
         text: {
-            fontFamily: "Cochin",
             fontSize: "15pt",
             color: "#eee !important",
         },
