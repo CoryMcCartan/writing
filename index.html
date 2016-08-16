@@ -12,7 +12,7 @@
     <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
 </head>
 <body>
-    <main :style="Themes[options.theme].app" @click="focusTextarea">
+    <main :style="Themes[options.theme].app"  @click="focusTextarea">
         <div class="top-info" :style="Themes[options.theme].chrome">
             <span class="mode-indicator">{{ writing ? "WRITING" : "EDITING" }}</span>
             <span class="spacer"></span>
@@ -23,12 +23,14 @@
         </div>
 
         <div class="textarea-parent" :style="wrapperStyle">
-            <textarea :style="[Themes[options.theme].text, {fontFamily: options.font}, Typing.styles]" :disabled="!writing"
+            <textarea :style="[Themes[options.theme].text, {fontFamily: options.font}, Typing.styles]" 
+             :disabled="!writing"
              @keydown='handleSpecialKeys' 
              @input='textEntered' 
              @change='saveWriting' 
              v-model="input.text"
-             placeholder="Type here" id="text"></textarea>
+             placeholder="Type here" id="text"
+             spell-check="false"></textarea>
         </div>
 
         <div class="fab-container">
@@ -51,6 +53,11 @@
                         <input type="checkbox" id="switch-1" class="mdl-switch__input" 
                                      v-model="options.typewriterScrolling">
                         <span class="mdl-switch__label">Typewriter scrolling</span>
+                    </label><br>
+                    <label v-mdl class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-2">
+                        <input type="checkbox" id="switch-2" class="mdl-switch__input" 
+                                     v-model="options.typewriterSounds">
+                        <span class="mdl-switch__label">Typewriter sounds</span>
                     </label>
 
                     <h5>Backspaces Allowed</h5>
@@ -94,6 +101,7 @@
         </dialog>
 
     </main>
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.21/vue.min.js"></script>
     <script src="https://corymccartan.github.io/jslib/lib.min.js"></script>

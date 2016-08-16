@@ -13,8 +13,9 @@ function main() {
             Typing,
             options: {
                 theme: "main",
-                font: "Cochin",
-                typewriterScrolling: false,
+                font: "Courier",
+                typewriterScrolling: true,
+                typewriterSounds: true,
                 maxBackspaces: 5,
             },
             input: {
@@ -85,6 +86,27 @@ function main() {
 
     window.addEventListener("beforeunload", function() {
         Storage.saveWriting.call(app);
+    });
+
+    let down_sound = new Audio("assets/keydown.mp3");
+    let up_sound = new Audio("assets/keyup.mp3");
+        up_sound.volume = 0.8;
+    let key_down = -1;
+    document.body.addEventListener("keydown", function(e) {
+        if (!app.options.typewriterSounds) return;
+        if (key_down === e.keyCode) {
+            e.preventDefault();
+            return;
+        }
+        key_down = e.keyCode;
+        down_sound.currentTime = 0;
+        down_sound.play(); 
+    });
+    document.body.addEventListener("keyup", function(e) {
+        if (!app.options.typewriterSounds) return;
+        key_down = -1;
+        up_sound.currentTime = 0;
+        up_sound.play(); 
     });
     
 }
