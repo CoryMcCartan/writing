@@ -22,7 +22,7 @@
                 {{ sentenceLength }} words per sentence</span>
         </div>
 
-        <div class="textarea-parent" :style="wrapperStyle">
+        <div class="zextarea-parent" :style="wrapperStyle">
             <textarea :style="[Themes[options.theme].text, {fontFamily: options.font}, Typing.styles]" 
              :disabled="!writing"
              @keydown='handleSpecialKeys' 
@@ -30,7 +30,7 @@
              @change='saveWriting' 
              v-model="input.text"
              placeholder="Type here" id="text"
-             spell-check="false"></textarea>
+             spell-check="false" spellcheck="false"></textarea>
         </div>
 
         <div class="fab-container">
