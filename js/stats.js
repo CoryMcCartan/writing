@@ -15,7 +15,7 @@ window.Stats = (function() {
 
     self.characterCount = function() {
         if (!this.input.text) return 0;
-        return this.input.text.length;
+        return this.input.text.replace(/\s/g, "").length;
     };
 
     self.readability = function() {
